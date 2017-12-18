@@ -19,12 +19,12 @@ namespace SporthalC3
 
         }
 
-        public IEnumerable<Reserve> Reserve => context.Reserve.Include(x=>x.SportsHall).ThenInclude(y => y.SportsBuilding).ThenInclude(f => f.SportsBuildingAdministrator);
+        public IEnumerable<Reserve> Reserve => context.Reserve.Include(x => x.SportsHall).ThenInclude(y => y.SportsBuilding).ThenInclude(f => f.SportsBuildingAdministrator);
 
         public Reserve DeleteReserve(int reserveID)
         {
             Reserve dbEntry = context.Reserve.FirstOrDefault(p => p.ReserveID == reserveID);
-            if(dbEntry != null)
+            if (dbEntry != null)
             {
                 context.Reserve.Remove(dbEntry);
                 context.SaveChanges();
@@ -49,7 +49,8 @@ namespace SporthalC3
                     dbEntry.PhoneNumber = reserve.PhoneNumber;
                     dbEntry.StartTime = reserve.StartTime;
                     dbEntry.EndTime = reserve.EndTime;
-                    
+                    dbEntry.Email = reserve.Email;
+                    dbEntry.Context = reserve.Context;
                 }
             }
             context.SaveChanges();
@@ -64,7 +65,7 @@ namespace SporthalC3
         {
             SportsBuildingAdministrator dbEntry = context.SportsBuildingAdministrators.FirstOrDefault(p => p.SportsBuildingAdministratorID == sportsBuildingAdministratorID);
 
-            if(dbEntry != null)
+            if (dbEntry != null)
             {
                 context.SportsBuildingAdministrators.Remove(dbEntry);
                 context.SaveChanges();
@@ -75,14 +76,14 @@ namespace SporthalC3
 
         public void SaveSportsBuildingAdministrator(SportsBuildingAdministrator sportsBuildingAdministrator)
         {
-            if(sportsBuildingAdministrator.SportsBuildingAdministratorID == 0)
+            if (sportsBuildingAdministrator.SportsBuildingAdministratorID == 0)
             {
                 context.SportsBuildingAdministrators.Add(sportsBuildingAdministrator);
             }
             else
             {
                 SportsBuildingAdministrator dbEntry = context.SportsBuildingAdministrators.FirstOrDefault(p => p.SportsBuildingAdministratorID == sportsBuildingAdministrator.SportsBuildingAdministratorID);
-                if(dbEntry != null)
+                if (dbEntry != null)
                 {
                     dbEntry.FirstName = sportsBuildingAdministrator.FirstName;
                     dbEntry.LastName = sportsBuildingAdministrator.LastName;
@@ -174,13 +175,13 @@ namespace SporthalC3
 
         public void SaveSportsHallAPI(SportsHall SportsHall)
         {
-            foreach(SportsHall dbEntry in context.SportsHall)
+            foreach (SportsHall dbEntry in context.SportsHall)
             {
 
-                if (SportsHall.Length !=  0)
+                if (SportsHall.Length != 0)
                     dbEntry.Length = SportsHall.Length;
-                if(SportsHall.NumberOfDressingSpace != 0)
-                dbEntry.NumberOfDressingSpace = SportsHall.NumberOfDressingSpace;
+                if (SportsHall.NumberOfDressingSpace != 0)
+                    dbEntry.NumberOfDressingSpace = SportsHall.NumberOfDressingSpace;
                 if (SportsHall.NumberOfShowers != 0)
                     dbEntry.NumberOfShowers = SportsHall.NumberOfShowers;
                 if (SportsHall.Width != 0)
