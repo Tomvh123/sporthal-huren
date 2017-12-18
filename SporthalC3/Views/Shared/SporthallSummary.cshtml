@@ -1,0 +1,54 @@
+﻿@model SportsHall
+
+<div class="well">
+    <h3><strong>@Model.SportsBuilding.Name</strong></h3>
+
+    <p>@Model.SportsBuilding.City </p>
+    <p>
+
+        @{
+            foreach (var i in Model.SportsHallSports)
+            {
+                @i.Sport.Name
+                if (i != Model.SportsHallSports.LastOrDefault())
+                {
+                    @:,
+                }
+            }
+        }
+
+    </p>
+    <p>
+        Kantine:
+        @{
+            if (Model.SportsBuilding.Canteen == true)
+            {
+                @: Ja,
+         }
+            if (Model.SportsBuilding.Canteen == false)
+            {
+                @: Nee,
+            }
+        }
+
+        Douches: @Model.NumberOfShowers, 
+        Kleedruimte: @Model.NumberOfDressingSpace, 
+        Lengte @Model.Length meter,
+        Breedte @Model.Width meter
+
+    </p>
+    <p>OpeningsTijd: @Model.OpenTime.ToString("HH:mm") - @Model.CloseTime.ToString("HH:mm")</p>
+    <p>Prijs: €@Model.Price</p>
+
+    <form class="p-a-1" asp-controller="Reserve" asp-action="ReserveSummary">
+
+        <input type="hidden" name="SportHallID" value=@Model.SportsHallID />
+
+        <div class="text-center">
+            <button class="btn btn-primary" >
+                Huren
+            </button>
+        </div>
+    </form>
+
+</div>

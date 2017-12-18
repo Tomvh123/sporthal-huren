@@ -1,0 +1,45 @@
+﻿@model ReserveViewModel
+
+@{
+    ViewData["Title"] = "Huren";
+}
+
+<div class="col-xs-12"><h2>Vergelijk sporthallen</h2><br /></div>
+<div class="panel-body">
+
+    <p>date @Model.Date</p>
+    <p>sporthalnaam @Model.SportsHall.SportsBuilding.Name</p>
+
+    <form class="p-a-1" asp-action="RsvpForm" method="post">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label>Tijd:</label>
+            <select class="form-control">
+                <option value="">Choose an option</option>
+                <option value="1">20:00 - 21:00</option>
+                <option value="2">21:00 - 22:00</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Reserve.FirstName">Voornaam:</label>
+            <input class="form-control" asp-for="Reserve.FirstName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Reserve.LastName">Achternaam:</label>
+            <input class="form-control" asp-for="Reserve.LastName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Reserve.Email">Email:</label>
+            <input class="form-control" asp-for="Reserve.Email" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Reserve.PhoneNumber">Telefoon:</label>
+            <input class="form-control" asp-for="Reserve.PhoneNumber" />
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="submit">
+                Huren
+            </button>
+        </div>
+    </form>
+</div>
