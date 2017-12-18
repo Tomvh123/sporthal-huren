@@ -1,0 +1,12 @@
+﻿@model Reserve
+
+<div class="well">
+    <h3><strong>@Model.FirstName @Model.LastName</strong></h3>
+
+    <p>@Model.Datum.ToString("dd-MM-yyyy")</p>
+    <p>@Model.StartTime.ToString("HH:mm") - @Model.EndTime.ToString("HH:mm") </p>
+    <p>@Model.SportsHall.SportsBuilding.Name, @Model.SportsHall.SportsBuilding.City</p>
+    <p>@Model.SportsHall.SportsBuilding.Street @Model.SportsHall.SportsBuilding.HouseNumber @Model.SportsHall.SportsBuilding.PostalCode</p>
+
+
+</div>

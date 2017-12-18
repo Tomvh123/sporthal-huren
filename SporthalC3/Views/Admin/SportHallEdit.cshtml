@@ -1,0 +1,34 @@
+﻿@model SportsHall
+
+@{
+    ViewData["Title"] = "Beheer";
+    Layout = "_AdminLayout";
+}
+
+<form asp-action="EditSportsHall" method="post">
+    <input type="hidden" asp-for="SportsHallID" />
+    <div class="form-group">
+        <label asp-for="Length"></label>
+        <div><span asp-validation-for="Length" class="text-danger"></span></div>
+        <input asp-for="Length" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Width"></label>
+        <div><span asp-validation-for="Width" class="text-danger"></span></div>
+        <input asp-for="Width" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfShowers"></label>
+        <div><span asp-validation-for="NumberOfShowers" class="text-danger"></span></div>
+        <input asp-for="NumberOfShowers" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfDressingSpace"></label>
+        <div><span asp-validation-for="NumberOfDressingSpace" class="text-danger"></span></div>
+        <input asp-for="NumberOfDressingSpace" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="Index" class="btn btn-default">Cancel</a>
+    </div>
+</form>

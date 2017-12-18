@@ -1,0 +1,231 @@
+﻿@model FilterViewModel
+
+@{
+    ViewData["Title"] = "Filter";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-12"><h2>Vergelijk sporthallen</h2><br /></div>
+        <div class="col-xs-3">
+            <form action="FilterView" method="get">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Sport</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <label>Selecteer sport:</label>
+                                <select class="form-control" name="sportname">
+                                    <option value=null> Alle Sporten </option>
+                                    @{
+                                        foreach (Sport s in Model.Sports)
+                                        {
+                                            if (s.Name == Model.SelectedSport)
+                                            {
+                                                <option selected value=@s.Name> @s.Name </option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@s.Name> @s.Name </option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Locatie</a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <label>Selecteer een locatie:</label>
+                                <select class="form-control" name="City">
+                                    <option value=null> Alle Locaties </option>
+                                    @{
+                                        foreach (SportsBuilding s in Model.SportBuildings)
+                                        {
+                                            if (s.City == Model.SelectedCity)
+                                            {
+                                                <option selected value=@s.City>@s.City</option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@s.City>@s.City</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapsTwo">Prijs</a>
+                            </h4>
+                        </div>
+                        <div id="collapsTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>Maximale prijs:</label>
+                                    <input value=@Model.Price name="Price" type="number" class="form-control" placeholder="Prijs" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Voorzieningen</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        @{
+                                            if (Model.Canteen == true)
+                                            {
+                                                <label><input checked type="checkbox" name="canteenstring"> Kantine</label>
+                                            }
+                                            else
+                                            {
+                                                <label><input type="checkbox" name="canteenstring"> Kantine</label>
+                                            }
+                                        }
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Minimale Lengte:</label>
+                                        <input value=@Model.Length name="length" type="number" class="form-control" placeholder="Lengte" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Minimale Breedte</label>
+                                        <input value=@Model.Width name="width" type="number" class="form-control" placeholder="Breedte" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Minimaal aantal Douches:</label>
+                                        <input value=@Model.NumberOfShowers name="NumberOfShowers" type="number" class="form-control" placeholder="AantalDouches" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Minimaal aantal kleedplekken:</label>
+                                        <input value=@Model.NumberOfDressingSpace name="NumberOfDressingSpace" type="number" class="form-control" placeholder="AantalKleedruimte" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Zoek op sportgebouw:</label>
+                    <input value=@Model.SportsBuildingName name="sportsBuildingName" class="form-control" placeholder="Sportgebouw Naam" />
+                </div>
+
+                <input type="submit" class=" btn btn-default btn-block" value="Filter" />
+                
+        </div>
+
+        <label id="label">Sorteer op:</label>
+        <div class="row col-xs-9">
+            <select class="form-control" name="OrderBy" id="az">
+                @{
+                    if (Model.OrderBy == "az")
+                    {
+                        <option selected value="az">A-Z</option>
+                    }
+                    else
+                    {
+                        <option value="az">A-Z</option>
+                    }
+
+                    if (Model.OrderBy == "za")
+                    {
+                        <option selected value="za">Z-A</option>
+                    }
+                    else
+                    {
+                        <option value="za">Z-A</option>
+                    }
+
+                    if (Model.OrderBy == "lh")
+                    {
+                        <option selected value="lh">Prijs: Laag - Hoog</option>
+                    }
+                    else
+                    {
+                        <option value="lh">Prijs: Laag - Hoog</option>
+                    }
+
+                    if (Model.OrderBy == "hl")
+                    {
+                        <option selected value="hl">Prijs: Hoog - Laag</option>
+                    }
+                    else
+                    {
+                        <option value="hl">Prijs: Hoog - Laag</option>
+                    }
+                    if (Model.OrderBy == "olh")
+                    {
+                        <option selected value="olh">Oppervlakte: Laag - Hoog</option>
+                    }
+                    else
+                    {
+                        <option value="olh">Oppervlakte: Laag - Hoog</option>
+                    }
+                    if (Model.OrderBy == "ohl")
+                    {
+                        <option selected value="ohl">Oppervlakte: Hoog - Laag</option>
+                    }
+                    else
+                    {
+                        <option value="ohl">Oppervlakte: Hoog - Laag</option>
+                    }
+                }
+            </select>
+            </form>
+            <div id="List">
+                @foreach (var p in Model.SportsHalls)
+                {
+                    @Html.Partial("SporthallSummary", p)
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+<script src="~/lib/bootstrap-slider/js/bootstrap-slider.js"></script>
+<script>
+    $('.slider').slider();
+
+    $(".slider").on('slideStop', (function (e) {
+
+        $(".slider-result").html("<label>Tot: " + e.value + "</label>");
+    }));
+</script>

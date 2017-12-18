@@ -1,0 +1,23 @@
+﻿#Navbar {
+    background-color: #99CCCC;
+}
+
+#navbarTextColorBlack {
+    color: black;
+}
+
+#az {
+    text-align: right;
+    float: right;
+    max-width: 200px;
+}
+
+#List {
+    margin-top: 50px;
+
+}
+
+#label {
+    float: right;
+    margin-right: 30px;
+}

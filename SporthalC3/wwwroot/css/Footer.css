@@ -1,0 +1,50 @@
+﻿
+
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -50px;
+}
+
+    .page-wrap:after {
+        content: "";
+        display: block;
+    }
+
+.site-footer, .page-wrap:after { 
+    /* Set the fixed height of the footer here */
+    height: 50px;
+
+    
+}
+
+.site-footer {
+    width: 100%;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+    height: 50px;
+}
+
+
+#footer {
+    position: fixed;
+    height: 50px;
+    background-color: orange;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+body {
+    margin-bottom: 50px;
+}

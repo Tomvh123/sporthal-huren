@@ -1,0 +1,19 @@
+﻿@model Sport
+
+@{
+    ViewData["Title"] = "Beheer";
+    Layout = "_AdminLayout";
+}
+
+<form asp-action="EditSport" method="post">
+    <input type="hidden" asp-for="SportID" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <div><span asp-validation-for="Name" class="text-danger"></span></div>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="Index" class="btn btn-default">Cancel</a>
+    </div>
+</form>

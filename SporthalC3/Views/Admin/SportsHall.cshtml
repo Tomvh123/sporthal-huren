@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SportsHall>
+
+@{
+    ViewData["Title"] = "Beheer";
+    Layout = "_AdminLayout";
+}
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th class="text-right">ID</th>
+        <th>Length</th>
+        <th>Width</th>
+        <th>NumberOfShowers</th>
+        <th>NumberOfDressingSpace</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-right">@item.SportsHallID</td>
+            <td>@item.Length</td>
+            <td>@item.Width</td>
+            <td>@item.NumberOfShowers</td>
+            <td>@item.NumberOfDressingSpace</td>
+            <td class="text-center">
+                <form asp-action="DeleteSportsHall" method="post">
+                    <a asp-action="EditSportHallView" class="btn btn-sm btn-warning"
+                       asp-route-sportHallID="@item.SportsHallID">
+                        Edit
+                    </a>
+                    <input type="hidden" name="SportsHallID" value="@item.SportsHallID" />
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+
+    }
+</table>
+<div class="text-center">
+    <a asp-action="CreateSportsHall" class="btn btn-primary">Toevoegen</a>
+</div>
