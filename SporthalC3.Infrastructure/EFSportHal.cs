@@ -204,7 +204,7 @@ namespace SporthalC3
 
         public IEnumerable<Sport> Sport => context.Sport;
 
-        public IEnumerable<SportsHall> SportsHallOnly => context.SportsHall;
+        public IEnumerable<SportsHall> SportsHallOnly => context.SportsHall.Include(x=>x.Reserve);
 
         public IEnumerable<SportsBuildingAdministrator> SportsBuildingAdministratorOnly => context.SportsBuildingAdministrators;
 

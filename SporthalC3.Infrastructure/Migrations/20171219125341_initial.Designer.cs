@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using SporthalC3.Models;
+using SporthalC3;
 
-namespace SporthalC3.Migrations
+namespace SporthalC3.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171004092648_PricePublic")]
-    partial class PricePublic
+    [Migration("20171219125341_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,8 @@ namespace SporthalC3.Migrations
                 {
                     b.Property<int>("ReserveID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Context");
 
                     b.Property<DateTime>("Datum");
 

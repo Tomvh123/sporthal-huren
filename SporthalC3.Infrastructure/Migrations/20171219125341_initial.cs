@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace SporthalC3.Migrations
+namespace SporthalC3.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -72,6 +72,7 @@ namespace SporthalC3.Migrations
                     NumberOfDressingSpace = table.Column<int>(nullable: false),
                     NumberOfShowers = table.Column<int>(nullable: false),
                     OpenTime = table.Column<DateTime>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     SportsBuildingID = table.Column<int>(nullable: true),
                     Width = table.Column<double>(nullable: false)
                 },
@@ -92,6 +93,7 @@ namespace SporthalC3.Migrations
                 {
                     ReserveID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Context = table.Column<string>(nullable: true),
                     Datum = table.Column<DateTime>(nullable: false),
                     Email = table.Column<string>(nullable: true),
                     EndTime = table.Column<DateTime>(nullable: false),

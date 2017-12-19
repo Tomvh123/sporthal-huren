@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using SporthalC3;
 
-namespace SporthalC3.Migrations
+namespace SporthalC3.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -20,6 +20,8 @@ namespace SporthalC3.Migrations
                 {
                     b.Property<int>("ReserveID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Context");
 
                     b.Property<DateTime>("Datum");
 

@@ -1,23 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SporthalC3.Web", "SporthalC3\SporthalC3.Web.csproj", "{D428EAD5-57B5-4D20-8D59-0A22873116A2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SporthalC3.Tests", "SporthalC3.Tests\SporthalC3.Tests.csproj", "{6ACCB2E5-D220-49E5-841D-191A46EB5CED}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FA65CC9E-CBE0-4CDB-B839-926A90363969} = {FA65CC9E-CBE0-4CDB-B839-926A90363969}
-		{C2C6F2BC-B269-40D9-8161-14ACFFD66D3A} = {C2C6F2BC-B269-40D9-8161-14ACFFD66D3A}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SporthalC3.Infrastructure", "SporthalC3.Infrastructure\SporthalC3.Infrastructure.csproj", "{C2C6F2BC-B269-40D9-8161-14ACFFD66D3A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SporthalC3.Core", "SporthalC3.Core\SporthalC3.Core.csproj", "{FA65CC9E-CBE0-4CDB-B839-926A90363969}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SporthalC3.API", "SporthalC3.API\SporthalC3.API.csproj", "{9ADBF66B-CEF5-495F-9037-151D2544BB17}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SporthalC3.WebAPI", "SporthalC3.WebAPI\SporthalC3.WebAPI.csproj", "{A9901324-C62A-4E45-B1FA-E33011914693}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SporthalC3.WebAPI", "SporthalC3.WebAPI\SporthalC3.WebAPI.csproj", "{A9901324-C62A-4E45-B1FA-E33011914693}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +21,6 @@ Global
 		{D428EAD5-57B5-4D20-8D59-0A22873116A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D428EAD5-57B5-4D20-8D59-0A22873116A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D428EAD5-57B5-4D20-8D59-0A22873116A2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6ACCB2E5-D220-49E5-841D-191A46EB5CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6ACCB2E5-D220-49E5-841D-191A46EB5CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6ACCB2E5-D220-49E5-841D-191A46EB5CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6ACCB2E5-D220-49E5-841D-191A46EB5CED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C2C6F2BC-B269-40D9-8161-14ACFFD66D3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2C6F2BC-B269-40D9-8161-14ACFFD66D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C6F2BC-B269-40D9-8161-14ACFFD66D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,10 +29,6 @@ Global
 		{FA65CC9E-CBE0-4CDB-B839-926A90363969}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA65CC9E-CBE0-4CDB-B839-926A90363969}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA65CC9E-CBE0-4CDB-B839-926A90363969}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9ADBF66B-CEF5-495F-9037-151D2544BB17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9ADBF66B-CEF5-495F-9037-151D2544BB17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9ADBF66B-CEF5-495F-9037-151D2544BB17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9ADBF66B-CEF5-495F-9037-151D2544BB17}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9901324-C62A-4E45-B1FA-E33011914693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9901324-C62A-4E45-B1FA-E33011914693}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9901324-C62A-4E45-B1FA-E33011914693}.Release|Any CPU.ActiveCfg = Release|Any CPU
