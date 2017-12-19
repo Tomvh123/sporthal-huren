@@ -34,6 +34,13 @@ namespace SporthalC3.WebAPI
             options.UseSqlServer(
                 Configuration["Data:SportsBuildingAdministrator:ConnectionString"]));
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             // Add framework services.
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -47,6 +54,11 @@ namespace SporthalC3.WebAPI
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            
+            
+
+
 
             app.UseMvc();
         }
