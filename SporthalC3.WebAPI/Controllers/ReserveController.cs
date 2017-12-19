@@ -18,7 +18,14 @@ namespace SporthalC3.WebAPI.Controllers
             repository = repo;
         }
 
-        //GET api/values
+        
+        [HttpGet("SporthalId")]
+        public IActionResult GetBySportHallId(int id, String dateTime)
+        {
+            DateTime dt = Convert.ToDateTime(dateTime);
+            return Ok(repository.GetReservesById(id, dt));
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
