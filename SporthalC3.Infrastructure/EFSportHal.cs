@@ -18,6 +18,25 @@ namespace SporthalC3
             context = ctx;
 
         }
+        
+        public IEnumerable<Reserve> GetReservesById(int SportHallID, DateTime date)
+        {
+            SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).FirstOrDefault();
+            List<Reserve> reserves = new List<Reserve>();
+            List<Reserve> matchedReserves = new List<Reserve>();
+
+            reserves = dbEntry.Reserve.Cast<Reserve>().ToList();
+
+            reserves.ForEach(x => {
+                if(x.Datum == date)
+                {
+                    x.SportsHall = null;
+                    matchedReserves.Add(x);
+                }
+            });
+
+            return matchedReserves;
+        }
 
         public IEnumerable<Reserve> Reserve => context.Reserve.Include(x => x.SportsHall).ThenInclude(y => y.SportsBuilding).ThenInclude(f => f.SportsBuildingAdministrator);
 

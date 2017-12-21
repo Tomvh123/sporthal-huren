@@ -16,6 +16,8 @@ namespace SporthalC3.Domain
 
         Reserve DeleteReserve(int reserveID);
 
+        IEnumerable<Reserve> GetReservesById(int SportHallID, DateTime date);
+
 
         IEnumerable<SportsBuildingAdministrator> SportsBuildingAdministrator { get; }
 

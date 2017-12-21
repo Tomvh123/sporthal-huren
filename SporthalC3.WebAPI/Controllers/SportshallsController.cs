@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SporthalC3.Domain;
 using SporthalC3.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace SporthalC3.WebAPI.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("MyPolicy")]
     public class SportsHallsController : Controller
     {
 

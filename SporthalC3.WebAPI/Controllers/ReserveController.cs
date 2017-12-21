@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SporthalC3.Domain;
 using SporthalC3.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace SporthalC3.WebAPI.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("MyPolicy")]
     public class ReserveController : Controller
     {
         private ISportHalRepository repository;
@@ -18,7 +20,14 @@ namespace SporthalC3.WebAPI.Controllers
             repository = repo;
         }
 
-        //GET api/values
+        
+        [HttpGet("SporthalId")]
+        public IActionResult GetBySportHallId(int id, String dateTime)
+        {
+            DateTime dt = Convert.ToDateTime(dateTime);
+            return Ok(repository.GetReservesById(id, dt));
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
