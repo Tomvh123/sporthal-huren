@@ -36,9 +36,8 @@ namespace SporthalC3.WebAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]Reserve reserve)
+        public IActionResult Post ([FromBody] Reserve reserve)
         {
-
             if (!ModelState.IsValid)
             {
                 return BadRequest();

@@ -54,6 +54,8 @@ namespace SporthalC3
 
         public void SaveReserve(Reserve reserve)
         {
+            reserve.SportsHall = context.SportsHall.FirstOrDefault(p => p.SportsHallID == reserve.SportsHall.SportsHallID);
+
             if (reserve.ReserveID == 0)
             {
                 context.Reserve.Add(reserve);
