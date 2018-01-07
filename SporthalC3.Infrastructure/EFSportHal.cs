@@ -18,13 +18,32 @@ namespace SporthalC3
             context = ctx;
 
         }
+        
+        public IEnumerable<Reserve> GetReservesById(int SportHallID, DateTime date)
+        {
+            SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).FirstOrDefault();
+            List<Reserve> reserves = new List<Reserve>();
+            List<Reserve> matchedReserves = new List<Reserve>();
 
-        public IEnumerable<Reserve> Reserve => context.Reserve.Include(x=>x.SportsHall).ThenInclude(y => y.SportsBuilding).ThenInclude(f => f.SportsBuildingAdministrator);
+            reserves = dbEntry.Reserve.Cast<Reserve>().ToList();
+
+            reserves.ForEach(x => {
+                if(x.Datum == date)
+                {
+                    x.SportsHall = null;
+                    matchedReserves.Add(x);
+                }
+            });
+
+            return matchedReserves;
+        }
+
+        public IEnumerable<Reserve> Reserve => context.Reserve.Include(x => x.SportsHall).ThenInclude(y => y.SportsBuilding).ThenInclude(f => f.SportsBuildingAdministrator);
 
         public Reserve DeleteReserve(int reserveID)
         {
             Reserve dbEntry = context.Reserve.FirstOrDefault(p => p.ReserveID == reserveID);
-            if(dbEntry != null)
+            if (dbEntry != null)
             {
                 context.Reserve.Remove(dbEntry);
                 context.SaveChanges();
@@ -35,6 +54,8 @@ namespace SporthalC3
 
         public void SaveReserve(Reserve reserve)
         {
+            reserve.SportsHall = context.SportsHall.FirstOrDefault(p => p.SportsHallID == reserve.SportsHall.SportsHallID);
+
             if (reserve.ReserveID == 0)
             {
                 context.Reserve.Add(reserve);
@@ -49,7 +70,8 @@ namespace SporthalC3
                     dbEntry.PhoneNumber = reserve.PhoneNumber;
                     dbEntry.StartTime = reserve.StartTime;
                     dbEntry.EndTime = reserve.EndTime;
-                    
+                    dbEntry.Email = reserve.Email;
+                    dbEntry.Context = reserve.Context;
                 }
             }
             context.SaveChanges();
@@ -64,7 +86,7 @@ namespace SporthalC3
         {
             SportsBuildingAdministrator dbEntry = context.SportsBuildingAdministrators.FirstOrDefault(p => p.SportsBuildingAdministratorID == sportsBuildingAdministratorID);
 
-            if(dbEntry != null)
+            if (dbEntry != null)
             {
                 context.SportsBuildingAdministrators.Remove(dbEntry);
                 context.SaveChanges();
@@ -75,14 +97,14 @@ namespace SporthalC3
 
         public void SaveSportsBuildingAdministrator(SportsBuildingAdministrator sportsBuildingAdministrator)
         {
-            if(sportsBuildingAdministrator.SportsBuildingAdministratorID == 0)
+            if (sportsBuildingAdministrator.SportsBuildingAdministratorID == 0)
             {
                 context.SportsBuildingAdministrators.Add(sportsBuildingAdministrator);
             }
             else
             {
                 SportsBuildingAdministrator dbEntry = context.SportsBuildingAdministrators.FirstOrDefault(p => p.SportsBuildingAdministratorID == sportsBuildingAdministrator.SportsBuildingAdministratorID);
-                if(dbEntry != null)
+                if (dbEntry != null)
                 {
                     dbEntry.FirstName = sportsBuildingAdministrator.FirstName;
                     dbEntry.LastName = sportsBuildingAdministrator.LastName;
@@ -174,13 +196,13 @@ namespace SporthalC3
 
         public void SaveSportsHallAPI(SportsHall SportsHall)
         {
-            foreach(SportsHall dbEntry in context.SportsHall)
+            foreach (SportsHall dbEntry in context.SportsHall)
             {
 
-                if (SportsHall.Length !=  0)
+                if (SportsHall.Length != 0)
                     dbEntry.Length = SportsHall.Length;
-                if(SportsHall.NumberOfDressingSpace != 0)
-                dbEntry.NumberOfDressingSpace = SportsHall.NumberOfDressingSpace;
+                if (SportsHall.NumberOfDressingSpace != 0)
+                    dbEntry.NumberOfDressingSpace = SportsHall.NumberOfDressingSpace;
                 if (SportsHall.NumberOfShowers != 0)
                     dbEntry.NumberOfShowers = SportsHall.NumberOfShowers;
                 if (SportsHall.Width != 0)
@@ -203,7 +225,7 @@ namespace SporthalC3
 
         public IEnumerable<Sport> Sport => context.Sport;
 
-        public IEnumerable<SportsHall> SportsHallOnly => context.SportsHall;
+        public IEnumerable<SportsHall> SportsHallOnly => context.SportsHall.Include(x=>x.Reserve);
 
         public IEnumerable<SportsBuildingAdministrator> SportsBuildingAdministratorOnly => context.SportsBuildingAdministrators;
 

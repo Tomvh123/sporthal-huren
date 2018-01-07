@@ -21,6 +21,8 @@ namespace SporthalC3.Models
 
         public String Email { get; set; }
 
+        public String Context { get; set; }
+
         public int PhoneNumber { get; set; }
 
         public virtual SportsHall SportsHall { get; set; }

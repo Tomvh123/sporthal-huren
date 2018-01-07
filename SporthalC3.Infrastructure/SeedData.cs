@@ -110,7 +110,8 @@ namespace SporthalC3
                                             PhoneNumber = 0646010205,
                                             Datum = new DateTime(2017,10,19),
                                             StartTime = new DateTime(1990,1,1,9,0,0),
-                                            EndTime = new DateTime(1999,1,1,10,0,0)
+                                            EndTime = new DateTime(1999,1,1,10,0,0),
+                                            Context = "reserved"
                                         },
                                         new Reserve
                                         {
@@ -120,7 +121,8 @@ namespace SporthalC3
                                             PhoneNumber = 0646010205,
                                             Datum = new DateTime(2017,10,6),
                                             StartTime = new DateTime(1990,1,1,10,0,0),
-                                            EndTime = new DateTime(1999,1,1,11,0,0)
+                                            EndTime = new DateTime(1999,1,1,11,0,0),
+                                            Context = "reserved"
                                         },
                                         new Reserve
                                         {
@@ -130,7 +132,8 @@ namespace SporthalC3
                                             PhoneNumber = 0646010205,
                                             Datum = new DateTime(2017,10,6),
                                             StartTime = new DateTime(1990,1,1,12,0,0),
-                                            EndTime = new DateTime(1999,1,1,13,0,0)
+                                            EndTime = new DateTime(1999,1,1,13,0,0),
+                                            Context = "reserved"
                                         }
                                     }
                                 },
