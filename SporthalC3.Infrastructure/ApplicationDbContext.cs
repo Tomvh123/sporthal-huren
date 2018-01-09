@@ -76,11 +76,6 @@ namespace SporthalC3
                 .HasKey(bc => new { bc.SportsHallId, bc.SportsId });
 
             modelBuilder.Entity<SportsHallSports>()
-                .HasOne(bc => bc.SportsHall)
-                .WithMany(b => b.SportsHallSports)
-                .HasForeignKey(bc => bc.SportsHallId);
-
-            modelBuilder.Entity<SportsHallSports>()
                 .HasOne(bc => bc.Sport)
                 .WithMany(c => c.SportsHallSports)
                 .HasForeignKey(bc => bc.SportsId);
