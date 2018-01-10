@@ -51,7 +51,7 @@ namespace SporthalC3.Domain
 
         void DeleteSportsHallAPI();
 
-        IEnumerable<SportsHall> SportsHallOnly { get; }
+        IEnumerable<SportsHall> SportsHallOnly();
 
         void SaveSportsHall(SportsHall sportsHall);
 

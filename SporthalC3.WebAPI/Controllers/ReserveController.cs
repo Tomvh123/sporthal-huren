@@ -46,8 +46,6 @@ namespace SporthalC3.WebAPI.Controllers
         [HttpPost]
         public IActionResult Post ([FromBody] Reserve reserve)
         {
-            Console.WriteLine("reservering maken");
-            Console.WriteLine(reserve.SportsHall);
             if (!ModelState.IsValid)
             {
                 return BadRequest();
