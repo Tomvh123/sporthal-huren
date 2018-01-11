@@ -37,7 +37,7 @@ namespace SporthalC3.WebAPI.Controllers
         {
             var sportsbuilding = repository.SportsBuilding.SingleOrDefault(p => p.SportsBuildingID == id);
             //sportsbuilding.SportsHallList = null;
-            List<SportsHall> sportshall = repository.SportsHallOnly.Where(p => p.SportsBuilding == sportsbuilding).ToList();
+            List<SportsHall> sportshall = repository.SportsHallOnly().Where(p => p.SportsBuilding == sportsbuilding).ToList();
             
 
             if (sportsbuilding == null)

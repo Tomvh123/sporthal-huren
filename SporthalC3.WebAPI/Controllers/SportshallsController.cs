@@ -24,14 +24,14 @@ namespace SporthalC3.WebAPI.Controllers
        [HttpGet]
         public IActionResult Get()
         {
-            return Ok(repository.SportsHallOnly);
+            return Ok(repository.SportsHallOnly());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var sportshall = repository.SportsHallOnly.SingleOrDefault(p => p.SportsHallID == id);
+            var sportshall = repository.SportsHallOnly().SingleOrDefault(p => p.SportsHallID == id);
 
             if (sportshall == null)
             {
@@ -62,7 +62,7 @@ namespace SporthalC3.WebAPI.Controllers
         {
 
             repository.SaveSportsHallAPI(sportsHall);
-            return Ok(repository.SportsHallOnly);
+            return Ok(repository.SportsHallOnly());
 
         }
 
@@ -103,7 +103,7 @@ namespace SporthalC3.WebAPI.Controllers
         public IActionResult Delete(int id)
         {
             repository.DeleteSportsHall(id);
-            return Ok(repository.SportsHallOnly);
+            return Ok(repository.SportsHallOnly());
 
 
         }

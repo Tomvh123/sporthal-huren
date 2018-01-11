@@ -289,9 +289,24 @@ namespace SporthalC3
 
         public IEnumerable<Sport> Sport => context.Sport;
 
-        public IEnumerable<SportsHall> SportsHallOnly => context.SportsHall
-            .Include(x=>x.Reserve)
-            .Include(y=>y.SportsBuilding);
+        public IEnumerable<SportsHall> SportsHallOnly()
+        {
+            List<SportsHall> sporthalls = context.SportsHall
+            .Include(x => x.Reserve)
+            .Include(x => x.SportsHallSports)
+            .ThenInclude(y => y.Sport)
+            .Include(y => y.SportsBuilding)
+            .ToList();
+
+            sporthalls.ForEach(sporthall => {
+                sporthall.SportsHallSports.ToList().ForEach(sporthallsports => {
+                    sporthallsports.Sport.SportsHallSports = null;
+                });
+            });
+
+            return sporthalls;
+        } 
+            
 
         public IEnumerable<SportsBuildingAdministrator> SportsBuildingAdministratorOnly => context.SportsBuildingAdministrators;
 
