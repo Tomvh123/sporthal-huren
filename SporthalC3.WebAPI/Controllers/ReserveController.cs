@@ -28,6 +28,14 @@ namespace SporthalC3.WebAPI.Controllers
             return Ok(repository.GetReservesById(id, dt));
         }
 
+        [HttpGet("ReserveWeek")]
+        public IActionResult GetReserveWeek(int id, String monday, String sunday)
+        {
+            DateTime dtmonday = Convert.ToDateTime(monday);
+            DateTime dtsunday = Convert.ToDateTime(sunday);
+            return Ok(repository.GetReservesByWeek(id, dtmonday, dtsunday));
+        }
+
         [HttpGet]
         public IActionResult Get()
         {

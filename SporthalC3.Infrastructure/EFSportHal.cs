@@ -38,6 +38,65 @@ namespace SporthalC3
             return matchedReserves;
         }
 
+        public IEnumerable<IEnumerable<Reserve>> GetReservesByWeek(int SportHallID, DateTime monday, DateTime sunday)
+        {
+            SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).FirstOrDefault();
+            List<Reserve> reserves = new List<Reserve>();
+
+            reserves = dbEntry.Reserve.Cast<Reserve>().ToList();
+
+            List<Reserve> Monday = new List<Reserve>(), 
+                Tuesday = new List<Reserve>(), 
+                Wednesday = new List<Reserve>(), 
+                Thursday = new List<Reserve>(), 
+                Friday = new List<Reserve>(), 
+                Saturday = new List<Reserve>(), 
+                Sunday = new List<Reserve>();
+
+            reserves.ForEach(x => {
+                if (x.Datum >= monday && x.Datum <= sunday)
+                {
+                    x.SportsHall = null;
+
+                    switch (x.Datum.DayOfWeek.ToString())
+                    {
+                        case "Monday":
+                            Monday.Add(x);
+                            break;
+                        case "Tuesday":
+                            Tuesday.Add(x);
+                            break;
+                        case "Wednesday":
+                            Wednesday.Add(x);
+                            break;
+                        case "Thursday":
+                            Thursday.Add(x);
+                            break;
+                        case "Friday":
+                            Friday.Add(x);
+                            break;
+                        case "Saturday":
+                            Saturday.Add(x);
+                            break;
+                        case "Sunday":
+                            Sunday.Add(x);
+                            break;
+                    }
+                   
+                }
+            });
+
+            List<List<Reserve>> Week = new List<List<Reserve>>();
+            Week.Add(Monday);
+            Week.Add(Tuesday);
+            Week.Add(Wednesday);
+            Week.Add(Thursday);
+            Week.Add(Friday);
+            Week.Add(Saturday);
+            Week.Add(Sunday);
+            return Week;
+        }
+
         public IEnumerable<Reserve> Reserve => context.Reserve.Include(x => x.SportsHall).ThenInclude(y => y.SportsBuilding).ThenInclude(f => f.SportsBuildingAdministrator);
 
         public Reserve DeleteReserve(int reserveID)
@@ -149,7 +208,12 @@ namespace SporthalC3
             context.SaveChanges();
         }
 
-        public IEnumerable<SportsHall> SportsHall => context.SportsHall.Include(x => x.SportsBuilding).ThenInclude(x => x.SportsBuildingAdministrator).Include(a => a.Reserve).Include(x => x.SportsHallSports).ThenInclude(x => x.Sport);
+        public IEnumerable<SportsHall> SportsHall => context.SportsHall
+            .Include(x => x.SportsHallSports)
+                .ThenInclude(q => q.Sport)
+            .Include(x => x.SportsBuilding)
+                .ThenInclude(x => x.SportsBuildingAdministrator)
+            .Include(a => a.Reserve);
 
         public void DeleteSportsHallAPI()
         {
@@ -225,7 +289,9 @@ namespace SporthalC3
 
         public IEnumerable<Sport> Sport => context.Sport;
 
-        public IEnumerable<SportsHall> SportsHallOnly => context.SportsHall.Include(x=>x.Reserve);
+        public IEnumerable<SportsHall> SportsHallOnly => context.SportsHall
+            .Include(x=>x.Reserve)
+            .Include(y=>y.SportsBuilding);
 
         public IEnumerable<SportsBuildingAdministrator> SportsBuildingAdministratorOnly => context.SportsBuildingAdministrators;
 
