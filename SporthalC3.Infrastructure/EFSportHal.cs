@@ -38,6 +38,38 @@ namespace SporthalC3
             return matchedReserves;
         }
 
+        public IEnumerable<Reserve> GetReservesByIdAndEmail(int SportHallID, string email)
+        {
+            // SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).FirstOrDefault();
+
+            // return context.Reserve.Where(x => x.SportsHall.SportsHallID == SportHallID);
+            SportsHall dbEntry = context.SportsHall.Where(x => x.SportsHallID == SportHallID).Include(y => y.Reserve).FirstOrDefault();
+
+            List<Reserve> reserves = new List<Reserve>();
+            List<Reserve> reservesFiltered = new List<Reserve>();
+            if(dbEntry != null)
+            {
+                reserves = dbEntry.Reserve.Cast<Reserve>().ToList();
+            }
+            
+
+            reserves.ForEach(x =>
+            {
+                if(x.Email == email)
+                {
+                    reservesFiltered.Add(x);
+                }
+                else
+                {
+
+                }
+
+            });
+
+            return reservesFiltered;
+
+        }
+
         public IEnumerable<IEnumerable<Reserve>> GetReservesByWeek(int SportHallID, DateTime monday, DateTime sunday)
         {
             SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).FirstOrDefault();
@@ -403,5 +435,7 @@ namespace SporthalC3
             context.Sport.RemoveRange(dbEntry);
             context.SaveChanges();
         }
+
+        
     }
 }

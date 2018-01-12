@@ -28,6 +28,13 @@ namespace SporthalC3.WebAPI.Controllers
             return Ok(repository.GetReservesById(id, dt));
         }
 
+        [HttpGet("Email")]
+        public IActionResult GetBySportHallIdAndEmail(int id, String email)
+        {
+
+            return Ok(repository.GetReservesByIdAndEmail(id, email));
+        }
+
         [HttpGet("ReserveWeek")]
         public IActionResult GetReserveWeek(int id, String monday, String sunday)
         {
@@ -64,5 +71,7 @@ namespace SporthalC3.WebAPI.Controllers
             repository.DeleteReserve(id);
             return Ok(repository.Reserve);
         }
+
+        
     }
 }

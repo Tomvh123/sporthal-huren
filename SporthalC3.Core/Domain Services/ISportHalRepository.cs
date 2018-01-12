@@ -18,6 +18,8 @@ namespace SporthalC3.Domain
 
         IEnumerable<Reserve> GetReservesById(int SportHallID, DateTime date);
 
+        IEnumerable<Reserve> GetReservesByIdAndEmail(int SportHallID, string email);
+
         IEnumerable<IEnumerable<Reserve>> GetReservesByWeek(int SportHallID, DateTime monday, DateTime sunday);
 
 
