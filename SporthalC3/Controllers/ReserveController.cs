@@ -62,7 +62,11 @@ namespace SporthalC3.Controllers
                 reserveViewModel.Reserve.Datum = Date;
                 
                 if(CheckReserve(reserveViewModel) != true)
+                {
+                    reserveViewModel.Reserve.Context = "Reservation";
                     repository.SaveReserve(reserveViewModel.Reserve);
+                }
+                    
 
                 return View("ReservationStatus", reserveViewModel);
             }
