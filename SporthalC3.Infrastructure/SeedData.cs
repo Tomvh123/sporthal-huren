@@ -20,13 +20,11 @@ namespace SporthalC3
             ApplicationDbContext context = app.ApplicationServices
                 .GetRequiredService<ApplicationDbContext>();
 
-            context.RemoveRange(context.Reserve);
-            context.RemoveRange(context.SportsHall);
-            context.RemoveRange(context.SportsBuilding);
-            context.SportsBuildingAdministrators.RemoveRange(context.SportsBuildingAdministrators);
-
-
-            context.SaveChanges();
+            //context.RemoveRange(context.Reserve);
+            //context.RemoveRange(context.SportsHall);
+            //context.RemoveRange(context.SportsBuilding);
+            //context.SportsBuildingAdministrators.RemoveRange(context.SportsBuildingAdministrators);
+            //context.SaveChanges();
 
             if (!context.Sport.Any())
             {
