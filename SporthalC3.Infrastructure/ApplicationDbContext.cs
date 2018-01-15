@@ -13,9 +13,7 @@ namespace SporthalC3
 {
     public class ApplicationDbContext : DbContext
     {
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
 
         [Required]
         public DbSet<SportsBuildingAdministrator> SportsBuildingAdministrators { get; set;}
@@ -31,43 +29,16 @@ namespace SporthalC3
 
         [Required]
         public DbSet<Sport> Sport { get; set; }
+
         [Required]
         public DbSet<SportsHallSports> SportHallSports { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //    modelBuilder.Entity<SportsBuildingAdministrator>()
-            //       .HasOne(d => d.SportBuildingList)
-            //        .WithMany()
-            //        .OnDelete(DeleteBehavior.Cascade);
-
-            //    modelBuilder.Entity<SportsBuilding>()
-            //        .HasOne(d => d.SportsHallList)
-            //        .WithMany()
-            //        .OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<SportsHall>()
-            //    .HasOne(d => d.SportsList)
-            //    .WithMany()
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<SportsBuildingAdministrator>()
-            //    .HasMany(p => p.SportBuildingList)
-            //    .WithOne().OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<SportsBuilding>()
-            //    .HasMany(p => p.SportsHallList)
-            //    .WithOne().OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<SportsHall>()
-            //    .HasMany(p => p.SportsHallSports)
-            //    .WithOne().OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<Reserve>()
                  .HasOne(x => x.SportsHall)
                  .WithMany(x => x.Reserve)
                  .OnDelete(DeleteBehavior.SetNull);
-
 
             modelBuilder.Entity<Sport>()
                 .HasMany(p => p.SportsHallSports);
@@ -85,21 +56,10 @@ namespace SporthalC3
                 .WithMany(x => x.SportBuildingList)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            //modelBuilder.Entity<SportsBuilding>()
-            //    .HasMany(x => x.SportsHallList)
-            //    .WithOne(x => x.SportsBuilding);
-
             modelBuilder.Entity<SportsHall>()
                 .HasOne(x => x.SportsBuilding)
                 .WithMany(x => x.SportsHallList)
                 .OnDelete(DeleteBehavior.Cascade);
-            
-            
-
-
-
-            
         }
-
     }
 }
