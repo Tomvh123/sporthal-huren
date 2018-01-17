@@ -4,56 +4,86 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SporthalC3.Domain;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using SporthalC3;
+using SporthalC3.Domain;
+
 
 namespace SporthalC3.Infrastructure
 {
     public class Startup
     {
+        IConfigurationRoot Configuration;
+
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
+            Configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+                .AddJsonFile("appsettings.json").Build();
+
         }
 
-        public IConfigurationRoot Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                 Configuration["Data:SportsBuildingAdministrator:ConnectionString"]));
 
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
 
-            // Add framework services.
-            services.AddMvc().AddJsonOptions(options => {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            });
+            services.AddDbContext<AppIdentityDbContext>(options =>
+            options.UseSqlServer(Configuration["Data:SportHallIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             services.AddTransient<ISportHalRepository, EFSportHal>();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);
+            });
+
+            services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            app.UseMvc();
+            app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
+            app.UseIdentity();
+            app.UseSession();
+            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                
+
+
+                routes.MapRoute(
+                    name: null,
+                    template: "Filter/Sportname{sportname}",
+                    defaults: new { controller = "Filter", action = "FilterView" });
+
+                routes.MapRoute(
+                    name: null,
+                    template: "Filter/{sportname}/{Length}/{Width}/{Canteen}/{NumberOfShowers}/{NumberOfDressingSpace}",
+                    defaults: new { controller = "Filter", action = "FilterView" });
+
+                routes.MapRoute(
+                     name: null,
+                    template: "Filter/Sportname{sportname}",
+                    defaults: new { controller = "Filter", action = "FilterView" });
+            });
+            
+
+            SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
