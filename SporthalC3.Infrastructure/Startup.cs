@@ -11,7 +11,7 @@ using SporthalC3.Domain;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-namespace SporthalC3.WebAPI
+namespace SporthalC3.Infrastructure
 {
     public class Startup
     {
@@ -53,7 +53,6 @@ namespace SporthalC3.WebAPI
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
             app.UseMvc();
         }
     }

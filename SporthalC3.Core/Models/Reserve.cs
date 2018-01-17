@@ -26,5 +26,9 @@ namespace SporthalC3.Models
         public int PhoneNumber { get; set; }
 
         public virtual SportsHall SportsHall { get; set; }
+
+        public Sport Sport { get; set; }
+
+        public Boolean IsPaid { get; set; }
     }
 }
