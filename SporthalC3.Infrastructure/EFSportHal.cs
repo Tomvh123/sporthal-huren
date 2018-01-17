@@ -21,7 +21,7 @@ namespace SporthalC3
         
         public IEnumerable<Reserve> GetReservesById(int SportHallID, DateTime date)
         {
-            SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).FirstOrDefault();
+            SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).ThenInclude(y => y.Sport).FirstOrDefault();
             List<Reserve> reserves = new List<Reserve>();
             List<Reserve> matchedReserves = new List<Reserve>();
 
@@ -43,7 +43,7 @@ namespace SporthalC3
             // SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).FirstOrDefault();
 
             // return context.Reserve.Where(x => x.SportsHall.SportsHallID == SportHallID);
-            SportsHall dbEntry = context.SportsHall.Where(x => x.SportsHallID == SportHallID).Include(y => y.Reserve).FirstOrDefault();
+            SportsHall dbEntry = context.SportsHall.Where(x => x.SportsHallID == SportHallID).Include(y => y.Reserve).ThenInclude(y => y.Sport).FirstOrDefault();
 
             List<Reserve> reserves = new List<Reserve>();
             List<Reserve> reservesFiltered = new List<Reserve>();
@@ -72,7 +72,7 @@ namespace SporthalC3
 
         public IEnumerable<IEnumerable<Reserve>> GetReservesByWeek(int SportHallID, DateTime monday, DateTime sunday)
         {
-            SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).FirstOrDefault();
+            SportsHall dbEntry = context.SportsHall.Where(y => y.SportsHallID == SportHallID).Include(x => x.Reserve).ThenInclude(y => y.Sport).FirstOrDefault();
             List<Reserve> reserves = new List<Reserve>();
 
             reserves = dbEntry.Reserve.Cast<Reserve>().ToList();
@@ -146,6 +146,8 @@ namespace SporthalC3
         public void SaveReserve(Reserve reserve)
         {
             reserve.SportsHall = context.SportsHall.FirstOrDefault(p => p.SportsHallID == reserve.SportsHall.SportsHallID);
+
+            reserve.Sport = context.Sport.FirstOrDefault(p => p.SportID == reserve.Sport.SportID);
 
             if (reserve.ReserveID == 0)
             {
