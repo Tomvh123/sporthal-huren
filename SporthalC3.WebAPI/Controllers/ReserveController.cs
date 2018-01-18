@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SporthalC3.Domain;
 using SporthalC3.Models;
 using Microsoft.AspNetCore.Cors;
+using System.Diagnostics;
 
 namespace SporthalC3.WebAPI.Controllers
 {
@@ -63,6 +64,24 @@ namespace SporthalC3.WebAPI.Controllers
                 new { id = reserve.ReserveID }, reserve);
 
         }
+
+        
+        [HttpPut("{id}")]
+        public IActionResult Put(int id)
+        {
+            
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest();
+            //}
+
+            
+
+            repository.changeIspaid(id);
+            return Ok(repository.Reserve.Where(x => x.ReserveID == id));
+        }
+
 
         // DELETE api/values/5
         [HttpDelete("{id}")]

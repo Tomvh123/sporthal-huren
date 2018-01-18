@@ -13,6 +13,7 @@ namespace SporthalC3.Domain
         IEnumerable<Reserve> Reserve { get; }
 
         void SaveReserve(Reserve reserve);
+        void changeIspaid(int id);
 
         Reserve DeleteReserve(int reserveID);
 
