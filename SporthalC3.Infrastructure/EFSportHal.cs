@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -143,6 +144,20 @@ namespace SporthalC3
 
         }
 
+        public void changeIspaid(int id)
+        {
+            Reserve dbEntry = context.Reserve.FirstOrDefault(p => p.ReserveID == id);
+            if (dbEntry != null)
+            {
+                dbEntry.IsPaid = true;
+            }
+            context.SaveChanges();
+        }
+
+
+
+      
+
         public void SaveReserve(Reserve reserve)
         {
             reserve.SportsHall = context.SportsHall.FirstOrDefault(p => p.SportsHallID == reserve.SportsHall.SportsHallID);
@@ -187,6 +202,8 @@ namespace SporthalC3
 
             return dbEntry;
         }
+
+       
 
         public void SaveSportsBuildingAdministrator(SportsBuildingAdministrator sportsBuildingAdministrator)
         {

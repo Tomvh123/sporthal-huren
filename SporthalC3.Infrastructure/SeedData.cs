@@ -109,7 +109,8 @@ namespace SporthalC3
                                             Datum = new DateTime(2017,10,19),
                                             StartTime = new DateTime(1990,1,1,9,0,0),
                                             EndTime = new DateTime(1999,1,1,10,0,0),
-                                            Context = "reserved"
+                                            Context = "reserved",
+                                            
                                         },
                                         new Reserve
                                         {
